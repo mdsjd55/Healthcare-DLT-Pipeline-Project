@@ -11,29 +11,8 @@ This project is an end-to-end **Delta Live Tables (DLT)** data pipeline built fo
 * **Key Features:** Streaming data ingestion, automated data quality (EXPECT constraints), Schema Evolution
 
 ##  Architecture Design
-    ``` 
-    graph TD
-    subgraph Raw Data Sources on GCP
-        A[patients_daily_file.csv <br> Real-time]:::raw
-        B[diagnosis_mapping.csv <br> Batch]:::raw
-    end
 
-    subgraph Databricks DLT Pipeline
-        C[(Bronze Layer <br> Raw Ingestion)]:::bronze
-        D[(Silver Layer <br> Enriched & Cleaned)]:::silver
-        E[(Gold Layer <br> Business Analytics)]:::gold
-    end
-
-    A -->|STREAM| C
-    B -->|LOAD| C
-    C -->|DQ Checks & Merge| D
-    D -->|Aggregations| E
-
-    classDef raw fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef bronze fill:#cd7f32,stroke:#333,stroke-width:2px,color:#fff;
-    classDef silver fill:#c0c0c0,stroke:#333,stroke-width:2px;
-    classDef gold fill:#ffd700,stroke:#333,stroke-width:2px;
-    ```
+    <img width="2590" height="3566" alt="image" src="https://github.com/user-attachments/assets/f63a238b-c15f-44a4-889b-5a3981ec6601" />
 
 *The pipeline processes raw daily admission records and reference mapping files through three distinct layers.*
 
