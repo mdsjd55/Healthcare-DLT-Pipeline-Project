@@ -5,6 +5,7 @@ This project is an end-to-end data pipeline built for healthcare data processing
 
 ## 🛠️ Tech Stack
 * **Languages:** Python (PySpark), Databricks SQL
+* **Cloud Platform:** Google Cloud Platform (GCS, Compute Engine)
 * **Framework:** Databricks Delta Live Tables (DLT)
 * **Storage & Governance:** Delta Lake, Unity Catalog Volumes
 * **Architecture:** Medallion (Bronze, Silver, Gold)
