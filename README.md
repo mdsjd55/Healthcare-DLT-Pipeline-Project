@@ -10,32 +10,22 @@ This project is an end-to-end data pipeline built for healthcare data processing
 * **Architecture:** Medallion (Bronze, Silver, Gold)
 
 ## 🏗️ Architecture Design
+1. Raw Ingestion (PySpark & Unity Catalog)
+Automated PySpark script (feed_raw_tables.ipynb) reads raw CSV files directly from Databricks Unity Catalog Volumes.
 
-```mermaid
-graph TD
-    subgraph Unity Catalog Volumes
-        A[patients_daily_file.csv <br> Daily Append]:::raw
-        B[diagnosis_mapping.csv <br> Batch]:::raw
-    end
+Applies explicit data type casting (e.g., String to Date) and writes to foundational Delta tables using mergeSchema to handle upstream schema drift.
 
-    subgraph PySpark Ingestion 
-        C[(Delta Tables <br> raw_patients_daily)]:::pyspark
-    end
+2. Bronze Layer (DLT Streaming)
+Ingests real-time patient admission data (STREAM()) and batch reference mapping tables.
 
-    subgraph DLT Pipeline (Databricks SQL)
-        D[(Bronze Layer <br> Streaming Ingestion)]:::bronze
-        E[(Silver Layer <br> Enriched & Cleaned)]:::silver
-        F[(Gold Layer <br> Business Analytics)]:::gold
-    end
+Data Quality: Drops records missing critical primary keys (e.g., patient_id) before they enter the data lake.
 
-    A -->|PySpark Read| C
-    B -->|PySpark Read| C
-    C -->|STREAM| D
-    D -->|DQ Checks & LEFT JOIN| E
-    E -->|Aggregations| F
+3. Silver Layer (Enrichment & Business Logic)
+Merges streaming patient data with diagnostic reference mapping.
 
-    classDef raw fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef pyspark fill:#00599C,stroke:#333,stroke-width:2px,color:#fff;
-    classDef bronze fill:#cd7f32,stroke:#333,stroke-width:2px,color:#fff;
-    classDef silver fill:#c0c0c0,stroke:#333,stroke-width:2px;
-    classDef gold fill:#ffd700,stroke:#333,stroke-width:2px;
+Applies dynamic COALESCE logic for unmapped codes and enforces EXPECT constraints to ensure all downstream records have valid diagnostic descriptions.
+
+4. Gold Layer (Aggregated Analytics)
+Produces clean, business-ready Live Tables optimized for hospital operations and research.
+
+Outputs: Daily operational metrics (capacity planning), demographic analysis, and diagnostic trends.
