@@ -1,0 +1,17 @@
+# Diagonosis mapping
+
+df = spark.read.option("header", "true").option("inferSchema", "true").csv("/Volumes/healthcare_data/diagnosis_mapping.csv")
+display(df)
+
+df.write.format("delta").mode("append").saveAsTable("gds_de_new.default.raw_diagnosis_map")
+
+#path = "/Volumes/default/healthcare_data/patients_daily_file_1_2025.csv"
+#path = "/Volumes/default/healthcare_data/patients_daily_file_2_2025.csv"
+path = "/Volumes/default/healthcare_data/patients_daily_file_3_2025.csv"
+
+df = spark.read.option("header", "true").option("inferSchema", "true").csv(f"{path}")
+df = df.withColumn("admission_date", df["admission_date"].cast("date"))
+
+display(df)
+
+df.write.format("delta").option("mergeSchema", "true").mode("append").saveAsTable("gds_de_new.default.raw_patients_daily")
