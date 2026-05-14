@@ -12,16 +12,15 @@ This project is an end-to-end data pipeline built for healthcare data processing
 ## 🏗️ Pipeline Architecture Steps
 
 ### 1. Raw Ingestion (PySpark & Unity Catalog)
-* Automated PySpark script (`feed_raw_tables.ipynb`) reads raw CSV files directly from Databricks Unity Catalog Volumes.
+* Automated PySpark script reads raw CSV files directly from Databricks Unity Catalog Volumes.
 * Applies explicit data type casting (e.g., String to Date) and writes to foundational Delta tables using `mergeSchema` to handle upstream schema drift.
 
 ### 2. Bronze Layer (DLT Streaming)
 * Ingests real-time patient admission data (`STREAM()`) and batch reference mapping tables.
-* **Data Quality:** Drops records missing critical primary keys (e.g., `patient_id`) before they enter the data lake.
+* **Data Quality:** Drops records missing critical primary keys before they enter the data lake.
 
 ### 3. Silver Layer (Enrichment & Business Logic)
 * Merges streaming patient data with diagnostic reference mapping.
-* Applies dynamic `COALESCE` logic for unmapped codes and enforces `EXPECT` constraints to ensure all downstream records have valid diagnostic descriptions.
 
 ### 4. Gold Layer (Aggregated Analytics)
 * Produces clean, business-ready Live Tables optimized for hospital operations and research.
