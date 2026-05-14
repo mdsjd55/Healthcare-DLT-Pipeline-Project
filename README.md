@@ -11,7 +11,7 @@ This project is an end-to-end **Delta Live Tables (DLT)** data pipeline built fo
 * **Key Features:** Streaming data ingestion, automated data quality (EXPECT constraints), Schema Evolution
 
 ##  Architecture Design
-    '''graph TD
+    ```mermaid)graph TD
     subgraph Raw Data Sources on GCP
         A[patients_daily_file.csv <br> Real-time]:::raw
         B[diagnosis_mapping.csv <br> Batch]:::raw
