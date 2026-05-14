@@ -7,7 +7,7 @@ This project is an end-to-end **Delta Live Tables (DLT)** data pipeline built fo
 * **Language:** Python / PySpark
 * **Framework:** Databricks Delta Live Tables (DLT)
 * **Architecture:** Medallion (Bronze, Silver, Gold)
-* **Cloud Infrastructure: Google Cloud Platform (GCS, Compute Engine)
+* **Cloud Infrastructure:** Google Cloud Platform (GCS, Compute Engine)
 * **Key Features:** Streaming data ingestion, automated data quality (EXPECT constraints), Schema Evolution
 
 ##  Architecture Design
