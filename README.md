@@ -3,13 +3,13 @@
 ## 📌 Project Overview
 This project is an end-to-end **Delta Live Tables (DLT)** data pipeline built for healthcare data processing. It implements a production-ready **Bronze-Silver-Gold medallion architecture** using PySpark. The pipeline seamlessly ingests real-time streaming patient data, enforces strict data quality constraints, and models the data for multi-dimensional business analytics.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 * **Language:** Python / PySpark
 * **Framework:** Databricks Delta Live Tables (DLT)
 * **Architecture:** Medallion (Bronze, Silver, Gold)
 * **Key Features:** Streaming data ingestion, automated data quality (EXPECT constraints), Schema Evolution
 
-## 🏗️ Architecture Design
+##  Architecture Design
 
 *The pipeline processes raw daily admission records and reference mapping files through three distinct layers.*
 
