@@ -19,7 +19,7 @@ SELECT
   -- Explicit type casting for data consistency
   CAST(diagnosis_code AS STRING) AS diagnosis_code,
   CAST(diagnosis_description AS STRING) AS diagnosis_description
-FROM gds_de_bootcamp_new.default.
+FROM gds_de_new.default.
 
    -- =============================================================================
 -- HEALTHCARE DLT PIPELINE - BRONZE LAYER: DAILY PATIENTS (STREAMING)
@@ -44,7 +44,7 @@ SELECT
   CAST(contact_number AS STRING) AS contact_number,
   CAST(admission_date AS DATE) AS admission_date,
   CAST(diagnosis_code AS STRING) AS diagnosis_code
-FROM STREAM(gds_de_bootcamp_new.default.raw_patients_daily)
+FROM STREAM(gds_de_new.default.raw_patients_daily)
 
 
 -- =============================================================================
