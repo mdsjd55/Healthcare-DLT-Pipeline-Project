@@ -32,5 +32,4 @@ This project is an end-to-end data pipeline built for healthcare data processing
 ├── src/
 │   ├── feed_raw_tables.ipynb           # PySpark ingestion from Unity Catalog Volumes
 │   └── healthcare_dlt_processing.ipynb # Databricks SQL Medallion pipeline (Bronze, Silver, Gold)
-├── data/                               # Sample raw CSV files for testing
 └── README.md
